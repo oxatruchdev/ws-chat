@@ -7,7 +7,6 @@
         var conn;
         var msg = document.getElementById("msg");
         var log = document.getElementById("log");
-        console.log("EXECUTING MY JS BTW");
 
         function appendLog(item) {
           var doScroll =
@@ -33,7 +32,6 @@
         if (window["WebSocket"]) {
           const path = window.location.pathname;
           const roomName = path.split("/").pop();
-          console.log("roomName", roomName);
           conn = new WebSocket(
             "ws://" + document.location.host + "/rooms/" + roomName + "/ws",
           );
