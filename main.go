@@ -51,7 +51,7 @@ func serveRoom(rm *RoomManager, w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
-	go hub.run()
+	hub.runOnce()
 	serveWs(hub, w, r)
 }
 

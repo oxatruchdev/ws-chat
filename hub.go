@@ -1,10 +1,14 @@
 package main
 
+import "sync"
+
 type Hub struct {
 	clients    map[*Client]bool
+	started    bool
 	broadcast  chan []byte
 	register   chan *Client
 	unregister chan *Client
+	mu         sync.Mutex
 }
 
 func newHub() *Hub {
@@ -36,5 +40,14 @@ func (h *Hub) run() {
 				}
 			}
 		}
+	}
+}
+
+func (h *Hub) runOnce() {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	if !h.started {
+		h.started = true
+		go h.run()
 	}
 }
