@@ -28,7 +28,6 @@ func (rm *RoomManager) run() {
 			if _, exists := rm.rooms[roomName]; !exists {
 				hub := newHub()
 				rm.rooms[roomName] = hub
-				go hub.run()
 			}
 			rm.mu.Unlock()
 		case roomName := <-rm.deleteRoom:
